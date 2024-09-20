@@ -10,3 +10,4 @@
 -The sub-list is pushed into a larger list called "positions" <br> <br>
 
 [See this working](https://npsboy.github.io/seating_randomiser/)   
+!Warning: Reload the page after clicking the link!
