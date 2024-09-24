@@ -1,0 +1,60 @@
+
+<body background="school_background.png">
+    <center>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+ 
+     <div style="
+         background-color: white;
+         border-radius: 12px;
+         padding: 40px 30px;
+         width: 650px;
+         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+     ">
+         <h1 style="font-size:40px; color:rgb(10, 10, 10);">Seating Arrangement Creator</h1>
+         <br>
+ 
+         <textarea 
+             id="student_names"
+             style="
+                 width: 600px;
+                 height: 150px;
+                 resize: none;
+                 overflow-wrap: break-word;
+                 white-space: pre-wrap;
+                 border: 1px solid #ccc;
+                 border-radius: 4px;
+                 padding: 10px;
+                 font-family: inherit;
+                 font-size: inherit;
+             "
+             placeholder="Enter student names, one per line..."></textarea>
+ 
+         <br><br>
+ 
+         <input type="button" 
+             value="Create!" 
+             onclick="loadPage_2()" 
+             style="
+                 border-radius: 12px; 
+                 border: none; 
+                 padding: 12px 40px; 
+                 font-size: 20px; 
+                 background-color: rgb(15, 177, 177); 
+                 color: white; 
+                 cursor: pointer;
+                 transition: background-color 0.3s, transform 0.2s;
+             "
+             onmouseover="this.style.backgroundColor='#12AFAF'; this.style.transform='scale(1.05)';"
+             onmouseout="this.style.backgroundColor='rgb(15, 177, 177)'; this.style.transform='scale(1)';"> 
+             <br> <br>
+        <span style="color: black; cursor: pointer; text-decoration: underline; font-size: 20px;"; class="clickable-text" onclick="load_example_values()">Click to load example...</span>
+     </div>
+ </center>
+ 
+ 
+ </body>
