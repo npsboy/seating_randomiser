@@ -26,7 +26,7 @@ function shuffle_array(array) {
         current_index--;
         [array[current_index], array[random_index]] = [array[random_index], array[current_index]];
     }
-    array.splice(array.indexOf(""), 1)
+    array = array.filter(name => name !== "");
     if ((array.includes("Tushar") || array.includes("tushar")) && (array.includes("Pratham") || array.includes("pratham"))) {
         
         if (array.includes(your_name_lower_case)) {
@@ -100,6 +100,7 @@ loadPage_1()
 
 function create_arrangement() {
     students = document.getElementById("student_names").value.split("\n")
+    students = students.filter(name => name !== "");
     og_students_list= students.slice()
     loadPage_2()
 }
