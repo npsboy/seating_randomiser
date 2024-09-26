@@ -1,85 +1,151 @@
 <head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color:bisque;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        flex-direction: column;
-    }
-    .classroom {
-        display: grid;
-        grid-gap: 20px;
-        width: 100%;
-        max-height: 90vh; /* Ensure it fits within viewport height */
-        overflow: auto; /* Scroll if needed */
-    }
-    .bench-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
-    .bench {
-        background-color: #8B4513;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        border-radius: 8px;
-        height: 60px;
-        position: relative;
-        margin-top: -30px; /* Adjust to cover part of student bodies */
-        width: calc(100% - 20px); /* Full width of its grid cell minus the gap */
-        max-width: 400px; /* Max width of bench */
-    }
-    .bench-number {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 16px;
-    }
-    .students {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center; /* Center students horizontally */
-        width: 100%;
-        gap: 10px; /* Space between students */
-    }
-    .student {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 60px;
-        margin-bottom: 10px;
-    }
-    .head {
-        width: 40px;
-        height: 40px;
-        background-color: #ffd966;
-        border-radius: 50%;
-    }
-    .body {
-        width: 60px;
-        height: 100px;
-        background-color: #ffeb3b;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-        border-radius: 10px;
-        font-size: 12px;
-        font-weight: bold;
-        padding-top: 30px; /* Adjust to place the name in the middle */
-    }
-</style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        /* Styling for the material icons */
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24; /* This can be kept low, we will scale it up below */
+            transform: scale(2); /* Scale the icon to make it bigger */
+            transition: transform 0.2s; /* Optional: smooth transition on hover */
+        }
+
+        .material-symbols-outlined:hover {
+            transform: scale(2.2); /* Slightly increase size on hover for effect */
+        }
+
+        .icon-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center icon and text horizontally */
+            justify-content: center; /* Center icon and text vertically */
+            cursor: pointer;
+            margin: 0 20px; /* Add spacing between buttons */
+            color: white; /* Ensure text color is visible */
+        }
+
+        .icon-button span {
+            margin-top: 5px;
+            font-size: 14px; /* Font size for text below icon */
+        }
+
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: bisque;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        /* Classroom styling */
+        .classroom {
+            display: grid;
+            grid-gap: 20px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: auto;
+            padding-bottom: 80px; /* Padding to avoid overlap with the banner */
+        }
+
+        /* Banner at the bottom */
+        .banner {
+            display: flex;
+            justify-content: center;
+            background-color: #8B4513; /* Brown color */
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        /* Bench and classroom layout */
+        .bench-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .bench {
+            background-color: #8B4513;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            height: 60px;
+            position: relative;
+            margin-top: -30px;
+            width: calc(100% - 20px);
+            max-width: 400px;
+        }
+        .bench-number {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+        }
+        .students {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            gap: 10px;
+        }
+        .student {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60px;
+            margin-bottom: 10px;
+        }
+        .head {
+            width: 40px;
+            height: 40px;
+            background-color: #ffd966;
+            border-radius: 50%;
+        }
+        .body {
+            width: 60px;
+            height: 100px;
+            background-color: #ffeb3b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: bold;
+            padding-top: 30px;
+        }
+    </style>
 </head>
 <body>
+    
+    <h1 align="center">Class Seating Arrangement</h1>
+    
+    <div class="classroom" id="classroom"></div>
+    
+    <!-- Brown banner with icon buttons at the bottom -->
+    <div class="banner">    
+        <div class="icon-button" onclick="edit()">
+            <span class="material-symbols-outlined">edit</span>
+            <span>Edit</span>
+        </div>   
 
-<h1 align="center">Class Seating Arrangement</h1>
-<div class="classroom" id="classroom"></div>
+        <div class="icon-button" onclick="loadPage_2()">
+            <span class="material-symbols-outlined">refresh</span>
+            <span>Randomise</span>
+        </div> 
+    </div>
 
 </body>
