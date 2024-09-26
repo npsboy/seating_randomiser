@@ -26,8 +26,14 @@ function shuffle_array(array) {
         current_index--;
         [array[current_index], array[random_index]] = [array[random_index], array[current_index]];
     }
-    array = array.filter(name => name !== "");
-    if ((array.includes("Tushar") || array.includes("tushar")) && (array.includes("Pratham") || array.includes("pratham"))) {
+
+    for (let i = array.length - 1; i >= 0; i--) {
+        if (array[i] === "") {
+            array.splice(i, 1); // Remove the empty string at index i
+        }
+    }
+
+    if ((array.includes(your_name) || array.includes(your_name_lower_case)) && (array.includes(friend_name) || array.includes(friend_name_lower_case))) {
         
         if (array.includes(your_name_lower_case)) {
             //array.indexof("tushar") = "Tushar" 
@@ -56,7 +62,6 @@ function shuffle_array(array) {
         
         
     }
-
 
 }
 
