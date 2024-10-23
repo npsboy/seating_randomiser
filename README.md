@@ -4,10 +4,10 @@
 -The list of all students in the class are provided in the code in the form of an array.
 <br>
 <h1>How does it work?</h1>
--The script first shuffles the list of students provided. <br>
--A loop then groups the 2 students at a time into a sub-list. <br>
+-A loop pick 2 random items from the students list and adds it to a sub list <br>
 -Each sub-list represents a bench. <br>
--The sub-list is pushed into a larger list called "positions" <br> <br>
+-The sub-list is pushed into a larger list called "positions" <br>
+<br>
 
 [See this working](https://npsboy.github.io/seating_randomiser/)   
 !Warning: Reload the page after clicking the link!

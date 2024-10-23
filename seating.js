@@ -12,58 +12,6 @@ function isEven(num) {
     return Number.isInteger(num/2)
 }
 
-function shuffle_array(array) {
-    let current_index = array.length;
-    let random_index = 0;
-    let your_name = "Tushar" //edit this
-    let your_name_lower_case = your_name.toLowerCase()
-
-    let friend_name = "Pratham"
-    let friend_name_lower_case = friend_name.toLowerCase()
-
-    while (current_index > 0) {
-        random_index = Math.floor(Math.random() * current_index);
-        current_index--;
-        [array[current_index], array[random_index]] = [array[random_index], array[current_index]];
-    }
-
-    for (let i = array.length - 1; i >= 0; i--) {
-        if (array[i] === "") {
-            array.splice(i, 1); // Remove the empty string at index i
-        }
-    }
-
-    if ((array.includes(your_name) || array.includes(your_name_lower_case)) && (array.includes(friend_name) || array.includes(friend_name_lower_case))) {
-        
-        if (array.includes(your_name_lower_case)) {
-            //array.indexof("tushar") = "Tushar" 
-            array[array.indexOf(your_name_lower_case)] = your_name 
-        }
-        if (array.includes(friend_name_lower_case)) {
-            array[array.indexOf(friend_name_lower_case)] = friend_name
-        }
-
-        let tushar_index = array.indexOf(your_name)
-        let friend_index = array.indexOf(friend_name)
-
-        array.splice(tushar_index, 1)
-        friend_index = array.indexOf(friend_name)
-        array.splice(friend_index, 1)
-        let random_number = Math.floor(Math.random()*array.length)
-        if (random_number==array.length) {
-            random_number = random_number - 2
-        }
-        if (!isEven(random_number)) {
-            random_number++
-        }
-        array.splice(random_number, 0, your_name)
-        array.splice(random_number+1, 0, friend_name)
-
-        
-        
-    }
-
-}
 
 async function edit() {
     const response = await fetch("page_1.html");  // Wait for the fetch to complete
@@ -95,7 +43,10 @@ async function loadPage_1() {
 function load_example_values() {
     let example_value = ""
     for (let index = 0; index < og_students_list.length; index++) {
-        example_value= example_value + og_students_list[index] + "\n"
+        example_value= example_value + og_students_list[index]
+        if (index!=og_students_list.length-1) {
+            example_value = example_value + "\n"
+        }
         
     }
     document.getElementById("student_names").value = example_value
@@ -110,38 +61,55 @@ function create_arrangement() {
     loadPage_2()
 }
 
-async function loadPage_2() {
+let your_name = "Tushar" //edit this
+let your_name_lower_case = your_name.toLowerCase()
 
-    // Step 1: Fetch the page
-    const response = await fetch("page_2.html");  // Wait for the fetch to complete
-  
-    // Step 2: Convert the response to text
-    const data = await response.text();  // Wait for the text conversion
-  
-    // Step 3: Inject the content into the page
-    document.getElementById('page_code').innerHTML = data;  // Update the content
-    document.body.style.backgroundImage = ""; // Clear the background image
-    document.body.style.backgroundColor = "bisque";
-    document.getElementById("classroom").innerHTML = ""
-    positions = []
-    
+let friend_name = "Aditya"
+let friend_name_lower_case = friend_name.toLowerCase()
 
-    //all other code is below
-
-    shuffle_array(students);
+function fix_case(array) {
+    if (array.includes(your_name_lower_case)) {
+        //array.indexof("tushar") = "Tushar" 
+        array[array.indexOf(your_name_lower_case)] = your_name 
+    }
+    if (array.includes(friend_name_lower_case)) {
+        array[array.indexOf(friend_name_lower_case)] = friend_name
+    }
+}
+function assign_positions() {
+    students = og_students_list.slice()
     console.log("shuffled list = " + students);
-  
-    for (let index = 0; index < students.length; index += 2) {
+    fix_case(students)
+    let extra_push_list = []
+    if (students.includes(your_name)&&students.includes(friend_name)) {
+        extra_push_list = [your_name,friend_name]
+        students.splice(students.indexOf(friend_name),1)
+        students.splice(students.indexOf(your_name),1)
+    }
+    let random_number_1 = Math.floor(Math.random() *students.length)
+    let students_length = students.length
+    for (let index = 0; index < students_length/2; index++) {
         sub_list = [];
-        sub_list.push(students[index]);
-        if (index + 1 < students.length) {
-            sub_list.push(students[index + 1]);
+        random_number_1 = Math.floor(Math.random() *students.length)
+        sub_list.push(students[random_number_1]);
+        students.splice(random_number_1,1)
+
+        if (students.length != 0) {
+            random_number_1 = Math.floor(Math.random() *students.length)
+            sub_list.push(students[random_number_1]);
+            students.splice(random_number_1,1)
         }
+
         positions.push(sub_list.slice());
+    }
+    if (extra_push_list.length != 0){
+        positions.splice((Math.floor(Math.random() *positions.length)), 0, extra_push_list)
     }
   
     console.log(positions);
-  
+}
+
+function assign_benches() {
     const benchesData = positions;
 
     const classroom = document.getElementById('classroom');
@@ -205,7 +173,29 @@ async function loadPage_2() {
     }
 
     // Populate the classroom with the provided benches data
-    populateClassroom(benchesData);
+    populateClassroom(benchesData);   
+}
+
+async function loadPage_2() {
+
+    // Step 1: Fetch the page
+    const response = await fetch("page_2.html");  // Wait for the fetch to complete
+  
+    // Step 2: Convert the response to text
+    const data = await response.text();  // Wait for the text conversion
+  
+    // Step 3: Inject the content into the page
+    document.getElementById('page_code').innerHTML = data;  // Update the content
+    document.body.style.backgroundImage = ""; // Clear the background image
+    document.body.style.backgroundColor = "bisque";
+    document.getElementById("classroom").innerHTML = ""
+    positions = []
+    
+
+    //all other code is below
+    assign_positions()
+    assign_benches()
+    
 }
 
 //loadPage_2();
