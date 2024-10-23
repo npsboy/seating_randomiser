@@ -10,4 +10,4 @@
 <br>
 
 [See this working](https://npsboy.github.io/seating_randomiser/)   
-!Warning: Reload the page after clicking the link!
+
