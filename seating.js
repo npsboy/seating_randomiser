@@ -1,8 +1,9 @@
 let positions = [];
 let students = [
-    "Thathastu", "Vivaan", "Aditya", "Vihaan", "Arjun", "Sai", "Aadhya", "Ishaan", "Ananya", "Aanya",
-    "Saanvi", "Karthik", "Meera", "Rohan", "Nisha", "Raj", "Anaya", "Amit", "Kavya",
-    "Riya", "Ayesha", "Vikram", "Priya", "Ravi", "Sneha", "Neha", "Varun", "Shivani", 
+    "Aarav", "Aditya", "Amogh", "Anshruta", "Arham", "Arnav", "Arpita", "Ashmita", 
+    "Atharva", "Bhavisha", "B.Vamsi", "B.Varnika", "Dhruv", "Dhruti", "Gautham", 
+    "Iniya", "Jagrith", "Kenisha", "L.Vinod", "Moksha", "Pratham", "Reya", "Samarth", 
+    "Sanjana", "Smera", "Tanishka", "Tushar", "Vanshika", "Varsha"
 ];
 let og_students_list = students
 
