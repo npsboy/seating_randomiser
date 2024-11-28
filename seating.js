@@ -63,10 +63,10 @@ function create_arrangement() {
     loadPage_2()
 }
 
-let your_name = "Tushar" //edit this
+let your_name = "John" //edit this
 let your_name_lower_case = your_name.toLowerCase()
 
-let friend_name = "Aditya"
+let friend_name = "x"
 let friend_name_lower_case = friend_name.toLowerCase()
 
 function fix_case(array) {
