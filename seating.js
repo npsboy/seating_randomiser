@@ -1,3 +1,4 @@
+
 let positions = [];
 let students = [
     "Aarav", "Aditya", "Amogh", "Anshruta", "Arham", "Arnav", "Arpita", "Ashmita", 
@@ -200,3 +201,22 @@ async function loadPage_2() {
 }
 
 //loadPage_2();
+
+function downloadPageAsImage() {
+    const classroomDiv = document.getElementById("classroom");
+
+            // Use html2canvas to capture the div, ensuring full scrollable content is included
+            html2canvas(classroomDiv, {
+                backgroundColor: '#ffe5c4',
+                useCORS: true, // Allows cross-origin resources if needed
+                scrollX: 0,    // Ignore scroll position
+                scrollY: 0,
+                windowWidth: classroomDiv.scrollWidth, // Ensure full width is captured
+                windowHeight: classroomDiv.scrollHeight // Ensure full height is captured
+            }).then(canvas => {
+                const link = document.createElement("a");
+                link.download = "classroom.png"; // File name for the download
+                link.href = canvas.toDataURL("image/png"); // Convert canvas to image
+                link.click(); // Trigger download
+            });
+}
