@@ -7,6 +7,13 @@ let students = [
     "Sanjana", "Smera", "Tanishka", "Tushar", "Vanshika", "Varsha"
 ];
 let og_students_list = students
+// Permanent example list that never changes
+const EXAMPLE_STUDENTS = [
+    "Aarav", "Aditya", "Amogh", "Anshruta", "Arham", "Arnav", "Arpita", "Ashmita", 
+    "Atharva", "Bhavisha", "B.Vamsi", "B.Varnika", "Dhruv", "Dhruti", "Gautham", 
+    "Iniya", "Jagrith", "Kenisha", "L.Vinod", "Moksha", "Pratham", "Reya", "Samarth", 
+    "Sanjana", "Smera", "Tanishka", "Tushar", "Vanshika", "Varsha"
+];
 let useRollNumbersState = false; // Track checkbox state
 let studentCountValue = 29; // Track student count
 
@@ -16,15 +23,18 @@ function toggleInputMode() {
     const checkbox = document.getElementById('role_numbers');
     const textArea = document.getElementById('student_names');
     const numberInput = document.getElementById('student_count');
+    const studentCountLabel = document.querySelector('.student-count-label');
     const exampleLink = document.querySelector('.clickable-text');
     
     if (checkbox.checked) {
         textArea.style.display = 'none';
         numberInput.style.display = 'block';
+        studentCountLabel.style.display = 'block';
         exampleLink.style.display = 'none';
     } else {
         textArea.style.display = 'block';
         numberInput.style.display = 'none';
+        studentCountLabel.style.display = 'none';
         exampleLink.style.display = 'inline';
     }
 }
@@ -47,13 +57,22 @@ async function edit() {
     // Restore the previous state
     const checkbox = document.getElementById('role_numbers');
     const studentCount = document.getElementById('student_count');
+    const textArea = document.getElementById('student_names');
     
     if (useRollNumbersState) {
         checkbox.checked = true;
         studentCount.value = studentCountValue;
         toggleInputMode();
     } else {
-        load_example_values();
+        // Load the current students, not the example
+        let current_value = ""
+        for (let index = 0; index < og_students_list.length; index++) {
+            current_value = current_value + og_students_list[index]
+            if (index != og_students_list.length - 1) {
+                current_value = current_value + "\n"
+            }
+        }
+        textArea.value = current_value;
     }
 }
 
@@ -74,9 +93,9 @@ async function loadPage_1() {
 
 function load_example_values() {
     let example_value = ""
-    for (let index = 0; index < og_students_list.length; index++) {
-        example_value= example_value + og_students_list[index]
-        if (index!=og_students_list.length-1) {
+    for (let index = 0; index < EXAMPLE_STUDENTS.length; index++) {
+        example_value= example_value + EXAMPLE_STUDENTS[index]
+        if (index!=EXAMPLE_STUDENTS.length-1) {
             example_value = example_value + "\n"
         }
         

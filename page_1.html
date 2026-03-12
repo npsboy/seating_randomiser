@@ -3,15 +3,7 @@
 </head>
 
 <body>
-    <center>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
-     <br>
- 
-     <div class="page-1-container">
+    <div class="page-1-container">
          <h1>Seating Arrangement Creator</h1>
          <br>
  
@@ -19,6 +11,7 @@
              id="student_names"
              placeholder="Enter student names, one per line..."></textarea>
  
+         <label for="student_count" class="student-count-label">How many students are there in the class?</label>
          <input type="number" 
              id="student_count"
              style="display: none;"
@@ -33,7 +26,7 @@
              <label for="role_numbers">Use roll numbers instead</label>
          </div>
         
-            <br><br>
+            <br>
  
          <input type="button" 
              class="create-button"
@@ -42,6 +35,5 @@
              <br> <br>
         <span class="clickable-text" onclick="load_example_values()">Click to load example...</span>
      </div>
- </center>
  
  </body>
