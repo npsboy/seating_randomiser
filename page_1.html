@@ -19,7 +19,21 @@
              id="student_names"
              placeholder="Enter student names, one per line..."></textarea>
  
+         <input type="number" 
+             id="student_count"
+             style="display: none;"
+             placeholder="Enter total number of students..."
+             min="1"
+             value="29">
+
          <br><br>
+
+         <div class="checkbox-container">
+             <input type="checkbox" id="role_numbers" name="role_numbers" value="role_numbers" onchange="toggleInputMode()">
+             <label for="role_numbers">Use roll numbers instead</label>
+         </div>
+        
+            <br><br>
  
          <input type="button" 
              class="create-button"

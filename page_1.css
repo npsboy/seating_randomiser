@@ -30,6 +30,66 @@ body {
     font-size: inherit;
 }
 
+#student_count {
+    width: 600px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 18px;
+}
+
+/* Custom Checkbox Styling */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.checkbox-container input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgb(15, 177, 177);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+.checkbox-container input[type="checkbox"]:hover {
+    border-color: #12AFAF;
+    box-shadow: 0 0 8px rgba(15, 177, 177, 0.3);
+}
+
+.checkbox-container input[type="checkbox"]:checked {
+    background-color: rgb(15, 177, 177);
+    border-color: rgb(15, 177, 177);
+}
+
+.checkbox-container input[type="checkbox"]:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.checkbox-container label {
+    font-size: 18px;
+    color: rgb(10, 10, 10);
+    cursor: pointer;
+    user-select: none;
+}
+
 .create-button {
     border-radius: 12px;
     border: none;

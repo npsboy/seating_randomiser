@@ -7,8 +7,27 @@ let students = [
     "Sanjana", "Smera", "Tanishka", "Tushar", "Vanshika", "Varsha"
 ];
 let og_students_list = students
+let useRollNumbersState = false; // Track checkbox state
+let studentCountValue = 29; // Track student count
 
 let sub_list = [];
+
+function toggleInputMode() {
+    const checkbox = document.getElementById('role_numbers');
+    const textArea = document.getElementById('student_names');
+    const numberInput = document.getElementById('student_count');
+    const exampleLink = document.querySelector('.clickable-text');
+    
+    if (checkbox.checked) {
+        textArea.style.display = 'none';
+        numberInput.style.display = 'block';
+        exampleLink.style.display = 'none';
+    } else {
+        textArea.style.display = 'block';
+        numberInput.style.display = 'none';
+        exampleLink.style.display = 'inline';
+    }
+}
 
 function isEven(num) {
     return Number.isInteger(num/2)
@@ -24,7 +43,18 @@ async function edit() {
     // Step 3: Inject the content into the page
     document.getElementById('page_code').innerHTML = data;  // Update the content
     document.body.style.backgroundImage = "url('school_background.png')";
-    load_example_values()
+    
+    // Restore the previous state
+    const checkbox = document.getElementById('role_numbers');
+    const studentCount = document.getElementById('student_count');
+    
+    if (useRollNumbersState) {
+        checkbox.checked = true;
+        studentCount.value = studentCountValue;
+        toggleInputMode();
+    } else {
+        load_example_values();
+    }
 }
 
 
@@ -57,10 +87,34 @@ function load_example_values() {
 loadPage_1()
 
 function create_arrangement() {
-    students = document.getElementById("student_names").value.split("\n")
-    students = students.filter(name => name !== "");
-    og_students_list= students.slice()
-    loadPage_2()
+    const useRollNumbers = document.getElementById("role_numbers").checked;
+    
+    // Save the state for when edit is clicked
+    useRollNumbersState = useRollNumbers;
+    
+    if (useRollNumbers) {
+        // Get the number of students from the number input
+        const studentCount = parseInt(document.getElementById("student_count").value);
+        if (isNaN(studentCount) || studentCount < 1) {
+            alert("Please enter a valid number of students");
+            return;
+        }
+        // Save student count
+        studentCountValue = studentCount;
+        
+        // Generate roll numbers
+        students = [];
+        for (let i = 1; i <= studentCount; i++) {
+            students.push("Roll No " + i);
+        }
+    } else {
+        // Use names from textarea
+        students = document.getElementById("student_names").value.split("\n");
+        students = students.filter(name => name !== "");
+    }
+    
+    og_students_list = students.slice();
+    loadPage_2();
 }
 
 let your_name = "John" //edit this
